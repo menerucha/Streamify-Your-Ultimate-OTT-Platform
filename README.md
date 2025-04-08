@@ -1,4 +1,5 @@
-🎬 Streamify: Your Ultimate OTT Platform
+**🎬 Streamify: Your Ultimate OTT Platform
+**
 Streamify is your go-to OTT platform for a seamless movie-watching experience. Whether you're up for a solo movie night or a weekend family marathon, Streamify makes it easy to browse, watch, and manage your favorites in one place.
 
 🌟 Weekend Movie Marathon with Streamify
