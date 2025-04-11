@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
-import { SlMenu } from "react-icons/sl";
+import { SlClose, SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Cookie from "js-cookie";
 import "./style.scss";
+
 import ContentWrapper from "../contentWrapper/ContentWrapper";
+import logo from "/movix-logo.png";
 
 const Header = () => {
   const [show, setShow] = useState("top");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [query, setQuery] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
+  const [showSearch, setShowSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-
-  const jwtToken = Cookie.get("jwtToken");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,7 +37,9 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
-    return () => window.removeEventListener("scroll", controlNavbar);
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
   }, [lastScrollY]);
 
   const searchQueryHandler = (e) => {
@@ -60,7 +62,11 @@ const Header = () => {
   };
 
   const navigationHandler = (type) => {
-    navigate(type === "movie" ? "/explore/movie" : "/explore/tv");
+    if (type === "movie") {
+      navigate("/explore/movie");
+    } else {
+      navigate("/explore/tv");
+    }
     setMobileMenu(false);
   };
 
@@ -69,48 +75,56 @@ const Header = () => {
     navigate("/login");
   };
 
+  const jwtToken = Cookie.get("jwtToken");
+
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
         <div className="logo">
-          <Link style={{ textDecoration: "none" }} to={"/"}>
+          <Link style={{ textDecoration: "None" }} to={"/"}>
             <h1 className="websiteName">Streamify</h1>
           </Link>
         </div>
-
         <ul className="menuItems">
           <li onClick={() => navigationHandler("movie")} className="menuItem">
             Movies
           </li>
           <li onClick={() => navigationHandler("tv")} className="menuItem">
+            Live TV
+          </li>
+          <li onClick={() => navigationHandler("tv")} className="menuItem">
             TV Shows
           </li>
-
           {!jwtToken && (
             <li className="menuItem">
-              <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link
+                style={{ textDecoration: "None", color: "inherit" }}
+                to="/login"
+              >
                 Login
               </Link>
             </li>
           )}
-
           {jwtToken && (
-            <li className="menuItem userDropdown">
-              <span>Account ▾</span>
-              <ul className="dropdownMenu">
-                <li>
-                  <Link to="/watchlist">WatchList</Link>
-                </li>
-                <li onClick={handleLogout}>Logout</li>
-              </ul>
-            </li>
+            <>
+              <li className="menuItem">
+                <Link
+                  style={{ textDecoration: "None", color: "inherit" }}
+                  to="/watchlist"
+                >
+                  WatchList
+                </Link>
+              </li>
+              <li onClick={handleLogout} className="menuItem">
+                Logout
+              </li>
+            </>
           )}
 
           <li className="menuItem">
             <HiOutlineSearch onClick={openSearch} />
           </li>
         </ul>
-
         <div className="mobileMenuItems">
           <HiOutlineSearch onClick={openSearch} />
           {mobileMenu ? (
@@ -127,7 +141,7 @@ const Header = () => {
             <div className="searchInput">
               <input
                 type="text"
-                placeholder="Search for a movie or TV show..."
+                placeholder="Search for a movie or tv show."
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyUp={searchQueryHandler}
               />

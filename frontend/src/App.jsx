@@ -11,6 +11,8 @@ import NotFoundPage from "./pages/404/NotFoundPage";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import WatchList from "./pages/watchlist/WatchList";
+import BookTickets from "./pages/BookTickets/BookTickets";
+
 import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   const url = useSelector((state) => state.home.url);
@@ -60,6 +62,7 @@ const App = () => {
         <Route path="/:mediaType/:id" element={<Details />} />
         <Route path="/search/:query" element={<Search />} />
         <Route path="/explore/:mediaType" element={<Explore />} />
+        <Route path="/book-tickets" element={<BookTickets />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

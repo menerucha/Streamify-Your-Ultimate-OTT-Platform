@@ -14,32 +14,47 @@ const Footer = () => {
   return (
     <footer className="footer">
       <ContentWrapper>
+        <div className="topSection">
+          <div className="brandInfo">
+            <h2 className="logo">Streamify</h2>
+            <p className="tagline">
+              Experience the future of entertainment at your fingertips. Enjoy seamless access to movies, shows, and more!
+            </p>
+          </div>
+          <div className="newsletter">
+            <h3>Subscribe to our Newsletter</h3>
+            <form className="newsletterForm">
+              <input type="email" placeholder="Enter your email" />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+
         <ul className="menuItems">
           <li className="menuItem">Terms Of Use</li>
-          <li className="menuItem">Privacy-Policy</li>
+          <li className="menuItem">Privacy Policy</li>
           <li className="menuItem">About</li>
           <li className="menuItem">Blog</li>
           <li className="menuItem">FAQ</li>
         </ul>
-        <div className="infoText">
-          Experience the future of entertainment at your fingertips with
-          Streamify's intuitive interface, empowering users to navigate
-          effortlessly through a vast library of high-quality, on-demand
-          content.
-        </div>
+
         <div className="socialIcons">
-          <span className="icon">
+          <a className="icon" href="https://facebook.com" target="_blank" rel="noreferrer">
             <FaFacebookF />
-          </span>
-          <span className="icon">
+          </a>
+          <a className="icon" href="https://instagram.com" target="_blank" rel="noreferrer">
             <FaInstagram />
-          </span>
-          <span className="icon">
+          </a>
+          <a className="icon" href="https://twitter.com" target="_blank" rel="noreferrer">
             <FaTwitter />
-          </span>
-          <span className="icon">
+          </a>
+          <a className="icon" href="https://linkedin.com" target="_blank" rel="noreferrer">
             <FaLinkedin />
-          </span>
+          </a>
+        </div>
+
+        <div className="copyright">
+          © {new Date().getFullYear()} Streamify. All rights reserved.
         </div>
       </ContentWrapper>
     </footer>
